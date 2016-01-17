@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :elm_base, ElmBase.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "rexikan",
+  password: "",
   database: "elm_base_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
