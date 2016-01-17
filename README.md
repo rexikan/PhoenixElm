@@ -1,5 +1,8 @@
 # ElmBase
 
+Test running elm embedded in Elixir.
+Inspired by https://github.com/CultivateHQ/seat_saver/wiki
+
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
