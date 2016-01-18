@@ -2,31 +2,44 @@ module App where
 
 import Html exposing (..)
 import Html.Events exposing (onClick)
-import StartApp.Simple as StartApp
+import StartApp
+import Effects exposing (Effects, Never)
+
+app: StartApp.App Model
+app =
+  StartApp.start
+    { init = init
+    , update = update
+    , view = view
+    , inputs = []
+    }
 
 
 main : Signal Html
 main =
-  StartApp.start { model = model, view = view, update = update }
+  app.html
 
 
 -- MODEL
 
 type alias Model = Int
 
-model: Model
-model = 0
+init : (Model, Effects Action)
+init = (0, Effects.none)
 
 
 -- UPDATE
 
 type Action = Increment | Decrement
 
-update: Action -> Model -> Model
+update: Action -> Model -> (Model, Effects Action)
 update action model =
-  case action of
-    Increment -> model + 1
-    Decrement -> model - 1
+  let
+    model = case action of
+      Increment -> model + 1
+      Decrement -> model - 1
+  in
+    (model, Effects.none)
 
 
 -- VIEW
