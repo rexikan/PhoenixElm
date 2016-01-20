@@ -22,4 +22,5 @@ import "phoenix_html"
 
 // Set up our Elm App
 let elmDiv = document.querySelector('#elm-container')
-let elmApp = Elm.embed(Elm.App, elmDiv)
+let elmApp = Elm.embed(Elm.App, elmDiv, { setModel: 0 })
+elmApp.ports.setModel.send(10)

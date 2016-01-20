@@ -11,7 +11,7 @@ app =
     { init = init
     , update = update
     , view = view
-    , inputs = []
+    , inputs = [setModelSignalAction]
     }
 
 
@@ -28,9 +28,19 @@ init : (Model, Effects Action)
 init = (0, Effects.none)
 
 
+-- SIGNALS
+
+-- JavaScript interface.
+port setModel : Signal Model
+
+-- Convert port to StartApp input type.
+setModelSignalAction: Signal Action
+setModelSignalAction =  Signal.map SetModel setModel
+
+
 -- UPDATE
 
-type Action = Increment | Decrement
+type Action = Increment | Decrement | SetModel Model
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -38,6 +48,7 @@ update action model =
     model = case action of
       Increment -> model + 1
       Decrement -> model - 1
+      SetModel model -> model
   in
     (model, Effects.none)
 
