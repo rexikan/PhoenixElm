@@ -17,16 +17,28 @@ initialModel =
 
 model: Signal Model
 model =
-  Signal.foldp update initialModel (Signal.merge actions.signal setModelActions)
+  Signal.foldp update initialModel mergedSignals
 
 -- Action
 
 type Action =
   Inc | SetModel Model
 
+mergedSignals: Signal Action
+mergedSignals =
+  Signal.mergeMany
+    [ actions.signal
+    , setModelAction
+    ]
+
 actions: Signal.Mailbox Action
 actions =
   Signal.mailbox Inc
+
+port setModel : Signal Model
+setModelAction: Signal Action
+setModelAction =
+  Signal.map SetModel setModel
 
 -- Update
 
@@ -44,10 +56,3 @@ view address model =
   [ li [ onClick address Inc ] [text "inc"]
   , li [] [(model |> toString |> text)]
   ]
-
--- JavaScript interface
-
-port setModel : Signal Model
-setModelActions: Signal Action
-setModelActions =
-  Signal.map SetModel setModel
