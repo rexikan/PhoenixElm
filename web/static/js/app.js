@@ -21,6 +21,14 @@ import "phoenix_html"
 // import socket from "./socket"
 
 // Set up our Elm App
+
 let elmDiv = document.querySelector('#elm-container')
 let elmApp = Elm.embed(Elm.App, elmDiv, { setModel: 0 })
 elmApp.ports.setModel.send(10)
+
+
+elmApp.ports.putMouseX.subscribe(putMouseX);
+
+function putMouseX(x) {
+    console.log(x);
+}

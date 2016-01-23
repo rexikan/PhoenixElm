@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Events exposing (onClick)
 import StartApp
 import Effects exposing (Effects, Never)
+import Mouse
 
 app: StartApp.App Model
 app =
@@ -32,11 +33,12 @@ init = (0, Effects.none)
 
 -- JavaScript interface.
 port setModel : Signal Model
-
 -- Convert port to StartApp input type.
 setModelSignalAction: Signal Action
 setModelSignalAction =  Signal.map SetModel setModel
 
+port putMouseX : Signal Int
+port putMouseX = Mouse.x
 
 -- UPDATE
 
