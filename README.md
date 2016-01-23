@@ -3,6 +3,7 @@
 Test running elm embedded in Elixir.
 Inspired by https://github.com/CultivateHQ/seat_saver/wiki
 https://github.com/justinwoo/elm-simple-ports-example/blob/master/src/elm/App.elm
+https://yobriefca.se/blog/2015/08/02/deconstructing-your-first-elm-app/
 
 To start your Phoenix app:
 
