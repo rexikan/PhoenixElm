@@ -52,6 +52,9 @@ port sendModel : Signal Model
 port sendModel =
   sendModelMailbox.signal
 
+port send2 : Signal String
+port send2 =
+  Signal.map toString actions.signal
 
 -- Update
 

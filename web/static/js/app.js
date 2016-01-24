@@ -26,6 +26,7 @@ let elmDiv = document.querySelector('#elm-container')
 let elmApp = Elm.embed(Elm.Main, elmDiv, { setModel: 0 })
 elmApp.ports.setModel.send(10)
 elmApp.ports.sendModel.subscribe(log);
+elmApp.ports.send2.subscribe(log);
 
 function log(x) {
     console.log(x);
