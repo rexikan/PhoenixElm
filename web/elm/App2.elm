@@ -19,7 +19,7 @@ initialModel =
 
 model: Signal Model
 model =
-  Signal.foldp update initialModel actions.signal
+  Signal.foldp update initialModel mergedSignals
 
 
 -- Action
@@ -27,6 +27,12 @@ model =
 type Action =
   Inc | SetModel Model
 
+mergedSignals: Signal Action
+mergedSignals =
+  Signal.mergeMany
+    [ actions.signal
+    , setModelAction
+    ]
 
 actions: Signal.Mailbox Action
 actions =
@@ -52,9 +58,6 @@ port sendModel : Signal Model
 port sendModel =
   sendModelMailbox.signal
 
-port send2 : Signal String
-port send2 =
-  Signal.map toString actions.signal
 
 -- Update
 
