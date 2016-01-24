@@ -3,6 +3,7 @@ defmodule ElmBase.UserSocket do
 
   ## Channels
   # channel "rooms:*", ElmBase.RoomChannel
+  channel "counters:counter", ElmBase.CounterChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
