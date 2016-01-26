@@ -11,7 +11,12 @@ defmodule ElmBase.CounterChannel do
   end
 
   def handle_info(:after_join, socket) do
-    push socket, "set_model", %{model: 90}
+    push socket, "set_model", %{model: 0}
+    {:noreply, socket}
+  end
+
+  def handle_in("send_model", payload, socket) do
+    push socket, "set_model", payload
     {:noreply, socket}
   end
 

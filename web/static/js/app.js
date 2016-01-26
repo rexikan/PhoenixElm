@@ -25,11 +25,6 @@ import socket from "./socket"
 let elmDiv = document.querySelector('#elm-container')
 let elmApp = Elm.embed(Elm.Main, elmDiv, { setModel: 0 })
 
-elmApp.ports.sendModel.subscribe(log)
-
-function log(x) {
-    console.log(x);
-}
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("counters:counter", {})
@@ -42,6 +37,10 @@ channel.on('set_model', data => {
   elmApp.ports.setModel.send(data.model)
 })
 
+elmApp.ports.sendModel.subscribe(function (x) {
+  console.log('sendModel with:', x)
+  channel.push("send_model", {model: x})
+})
 // let elmDiv = document.querySelector('#elm-container')
 // let elmApp = Elm.embed(Elm.App, elmDiv, { setModel: 0 })
 // elmApp.ports.setModel.send(10)
