@@ -33,21 +33,11 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on('set_model', data => {
-  console.log('got set_model with:', data)
+  console.log('Receiving model', data)
   elmApp.ports.setModel.send(data.model)
 })
 
-elmApp.ports.sendModel.subscribe(function (x) {
-  console.log('sendModel with:', x)
-  channel.push("send_model", {model: x})
+elmApp.ports.sendAction.subscribe(function (x) {
+  console.log('Sending action:', x)
+  channel.push("send_action", { action: x })
 })
-// let elmDiv = document.querySelector('#elm-container')
-// let elmApp = Elm.embed(Elm.App, elmDiv, { setModel: 0 })
-// elmApp.ports.setModel.send(10)
-//
-//
-// elmApp.ports.putMouseX.subscribe(putMouseX);
-//
-// function putMouseX(x) {
-//     console.log(x);
-// }

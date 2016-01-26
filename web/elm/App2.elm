@@ -1,10 +1,11 @@
 import Signal
-import Html exposing (Html, text, li, ul)
+import Html exposing (Html, p, div, button, h1, text)
 import Html.Events exposing (onClick)
 
 main : Signal Html
 main =
-  Signal.map (view actions.address sendModelMailbox.address) model
+  Signal.map (view actions.address) model
+
 
 -- Model
 
@@ -22,17 +23,17 @@ model =
   Signal.foldp update initialModel mergedSignals
 
 
--- Action
-
-type Action =
-  Inc | SetModel Model
-
 mergedSignals: Signal Action
 mergedSignals =
   Signal.mergeMany
     [ actions.signal
     , setModelAction
     ]
+
+-- Action
+
+type Action =
+  Inc | Dec | SetModel Model
 
 actions: Signal.Mailbox Action
 actions =
@@ -49,14 +50,8 @@ setModelAction =
 
 -- Outgoing port
 
-sendModelMailbox: Signal.Mailbox Model
-sendModelMailbox =
-  Signal.mailbox 0
-
-
-port sendModel : Signal Model
-port sendModel =
-  sendModelMailbox.signal
+port sendAction : Signal String
+port sendAction = Signal.map toString actions.signal
 
 
 -- Update
@@ -65,15 +60,18 @@ update: Action -> Model -> Model
 update action model =
   case action of
     Inc -> model + 1
+    Dec -> model - 1
     SetModel newModel -> newModel
 
 
 -- View
 
-view: Signal.Address Action -> Signal.Address Model -> Model -> Html
-view actionAddress sendModelMailbox model =
-  ul []
-  [ li [ onClick actionAddress Inc ] [text "inc"]
-  , li [ onClick sendModelMailbox model ] [text "send"]
-  , li [] [(model |> toString |> text)]
-  ]
+view: Signal.Address Action -> Model -> Html
+view actionAddress model =
+  div []
+    [ h1 [] [(model |> toString |> text)]
+    , p []
+      [ button [ onClick actionAddress Dec ] [ text "-" ]
+      , button [ onClick actionAddress Inc ] [ text "+" ]
+      ]
+    ]
