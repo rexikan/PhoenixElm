@@ -1,6 +1,6 @@
-# ElmBase
+# PhoenixElm
 
-A simple test of running [Elm](http://elm-lang.org/) embedded in [Phoenix](http://www.phoenixframework.org/), talking over [ports](http://elm-lang.org/guide/interop) and [channels](http://www.phoenixframework.org/docs/channels) to the server. When the user clicks on the `+` or `-` buttons, the command is sent to the server, and the model is updated and updated state is sent back. While waiting on the response of the action, Elm also makes a local update.
+A proof of concept embedding [Elm](http://elm-lang.org/) in [Elixir](http://elixir-lang.org/) [Phoenix](http://www.phoenixframework.org/), communicating over [channel](http://www.phoenixframework.org/docs/channels).
 
 Look at the JavaScript console and the web socket to see the behind-the-scene action.
 
@@ -14,6 +14,8 @@ Inspired by:
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
-  2. Start Phoenix endpoint with `mix phoenix.server`
+  2. Install more dependencies with `npm install`
+  3. Finish up pulling dependencies with `cd web/elm/` and `elm make`
+  4. Start Phoenix endpoint from project root with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
