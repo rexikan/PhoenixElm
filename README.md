@@ -4,11 +4,18 @@ A proof of concept embedding [Elm](http://elm-lang.org/) in [Elixir](http://elix
 
 Look at the JavaScript console and the web socket to see the behind-the-scene action.
 
+The interesting bits of code are found at
+
+  * [web/elm/App2.elm](https://github.com/rexikan/PhoenixElm/blob/master/web/elm/App2.elm)
+  * [web/static/js/app.js](https://github.com/rexikan/PhoenixElm/blob/master/web/static/js/app.js)
+  * [web/channels/counter_channel.ex](https://github.com/rexikan/PhoenixElm/blob/master/web/channels/counter_channel.ex)
+
 Inspired by:
 
   * https://github.com/CultivateHQ/seat_saver/wiki
   * https://github.com/justinwoo/elm-simple-ports-example/blob/master/src/elm/App.elm
   * https://yobriefca.se/blog/2015/08/02/deconstructing-your-first-elm-app/
+  * http://www.fullyforged.com/2016/01/21/phoenix-and-elm-tracking-the-connection-status.html
 
 
 To start your Phoenix app:
